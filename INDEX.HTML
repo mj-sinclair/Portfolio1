@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joel Edward Wairimu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0d0e;
+    --bg-alt:#0e1315;
+    --glass:rgba(22,29,31,0.55);
+    --glass-border:rgba(255,255,255,0.08);
+    --accent:#39ff9d;
+    --accent-dim:rgba(57,255,157,0.15);
+    --text:#e9edee;
+    --text-dim:#8a9a97;
+    --mono:'Space Mono', monospace;
+    --sans:'Inter', sans-serif;
+  }
+  html[data-theme="light"]{
+    --bg:#f4f6f5;
+    --bg-alt:#eceeed;
+    --glass:rgba(255,255,255,0.6);
+    --glass-border:rgba(10,20,18,0.09);
+    --accent:#0aa864;
+    --accent-dim:rgba(10,168,100,0.12);
+    --text:#101615;
+    --text-dim:#5b6764;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:radial-gradient(ellipse at top, var(--bg-alt) 0%, var(--bg) 55%);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    transition:background .3s ease, color .3s ease;
+  }
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--accent-dim);color:var(--accent);}
+
+  /* Nav */
+  header{
+    position:sticky;top:0;z-index:50;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:20px 6vw;
+    background:rgba(10,13,14,0.7);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--glass-border);
+  }
+  .logo{font-family:var(--mono);font-weight:700;font-size:15px;letter-spacing:0.5px;}
+  .logo span{color:var(--accent);}
+  nav ul{list-style:none;display:flex;gap:28px;}
+  nav a{font-size:13px;color:var(--text-dim);transition:color .2s;}
+  nav a:hover{color:var(--accent);}
+  .nav-wrap{display:flex;align-items:center;gap:26px;}
+  #theme-toggle{
+    font-family:var(--mono);font-size:12px;
+    background:var(--glass);border:1px solid var(--glass-border);
+    color:var(--text);border-radius:20px;padding:7px 14px;
+    cursor:pointer;backdrop-filter:blur(10px);
+    display:flex;align-items:center;gap:6px;
+    transition:border-color .2s;
+  }
+  #theme-toggle:hover{border-color:var(--accent-dim);color:var(--accent);}
+
+  section{padding:90px 6vw;max-width:1180px;margin:0 auto;}
+
+  /* Hero */
+  .hero{
+    padding-top:110px;
+    display:grid;grid-template-columns:1.3fr 1fr;gap:60px;align-items:center;
+  }
+  .eyebrow{
+    font-family:var(--mono);font-size:12px;color:var(--accent);
+    text-transform:uppercase;letter-spacing:2px;margin-bottom:18px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);}
+  h1{font-size:clamp(36px,5vw,58px);font-weight:700;line-height:1.05;letter-spacing:-1px;}
+  .phonetic{
+    font-family:var(--mono);color:var(--text-dim);font-size:16px;margin:14px 0 6px;
+  }
+  .phonetic b{color:var(--accent);}
+  .lede{color:var(--text-dim);font-size:16px;max-width:52ch;margin-top:18px;}
+  .hero-actions{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono);font-size:13px;padding:12px 22px;border-radius:8px;
+    border:1px solid var(--glass-border);
+  }
+  .btn-primary{background:var(--accent);color:#04120a;font-weight:700;}
+  .btn-ghost{background:var(--glass);color:var(--text);backdrop-filter:blur(10px);}
+
+  .id-card{
+    font-family:var(--mono);
+    background:var(--glass);border:1px solid var(--glass-border);
+    border-radius:14px;padding:26px;backdrop-filter:blur(16px);
+    font-size:13px;color:var(--text-dim);
+  }
+  .id-card .line{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dashed rgba(255,255,255,0.06);}
+  .id-card .line:last-child{border-bottom:none;}
+  .id-card .val{color:var(--text);}
+  .status-dot{color:var(--accent);}
+
+  /* Section headers */
+  .sec-eyebrow{font-family:var(--mono);font-size:12px;color:var(--text-dim);text-transform:uppercase;letter-spacing:2px;}
+  .sec-title{font-size:clamp(26px,3.5vw,38px);font-weight:700;margin:8px 0 8px;letter-spacing:-0.5px;}
+  .sec-phonetic{font-family:var(--mono);color:var(--accent);font-size:14px;margin-bottom:36px;}
+
+  /* Skills */
+  .skills-grid{display:flex;flex-wrap:wrap;gap:12px;}
+  .pill{
+    font-family:var(--mono);font-size:13px;padding:10px 18px;border-radius:30px;
+    border:1px solid var(--glass-border);background:var(--glass);backdrop-filter:blur(10px);
+    color:var(--text-dim);
+  }
+  .pill:hover{color:var(--accent);border-color:var(--accent-dim);}
+
+  /* Terminal cards (experience) */
+  .term-card{
+    background:var(--glass);border:1px solid var(--glass-border);border-radius:14px;
+    backdrop-filter:blur(16px);margin-bottom:22px;overflow:hidden;
+  }
+  .term-bar{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:12px 20px;border-bottom:1px solid var(--glass-border);
+    font-family:var(--mono);font-size:12px;color:var(--text-dim);
+  }
+  .term-bar .path{color:var(--accent);}
+  .status-tag{
+    font-family:var(--mono);font-size:11px;padding:4px 10px;border-radius:20px;
+    background:var(--accent-dim);color:var(--accent);
+  }
+  .term-body{padding:22px 24px;}
+  .term-body h3{font-size:20px;font-weight:700;margin-bottom:4px;}
+  .role-sub{color:var(--text-dim);font-size:13px;margin-bottom:14px;}
+  .term-log{
+    font-family:var(--mono);font-size:12px;color:var(--text-dim);
+    background:rgba(0,0,0,0.25);border-radius:8px;padding:12px 14px;margin-bottom:16px;
+    line-height:1.8;
+  }
+  .term-log .g{color:var(--accent);}
+  .desc{font-size:14px;color:var(--text-dim);margin-bottom:14px;}
+  .achievements{list-style:none;font-size:13px;color:var(--text-dim);}
+  .achievements li{padding:4px 0;padding-left:18px;position:relative;}
+  .achievements li::before{content:'›';position:absolute;left:0;color:var(--accent);}
+
+  /* Education */
+  .edu-list{display:flex;flex-direction:column;gap:0;}
+  .edu-item{
+    display:flex;gap:20px;padding:18px 0;border-bottom:1px solid var(--glass-border);
+  }
+  .edu-num{font-family:var(--mono);color:var(--accent);font-size:13px;min-width:26px;}
+  .edu-title{font-weight:600;font-size:15px;}
+  .edu-sub{color:var(--text-dim);font-size:13px;margin-top:2px;}
+
+  /* Referees */
+  .ref-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;}
+  .ref-card{
+    background:var(--glass);border:1px solid var(--glass-border);border-radius:12px;
+    padding:20px;backdrop-filter:blur(14px);
+  }
+  .ref-card h4{font-size:15px;margin-bottom:4px;}
+  .ref-card p{font-size:13px;color:var(--text-dim);}
+  .ref-card .tel{font-family:var(--mono);color:var(--accent);font-size:13px;margin-top:8px;display:block;}
+
+  /* Contact */
+  .contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+  .contact-block h4{font-family:var(--mono);font-size:12px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;}
+  .contact-block .big{font-size:22px;font-weight:600;margin-bottom:24px;}
+  .contact-block a.big{color:var(--accent);}
+
+  footer{
+    border-top:1px solid var(--glass-border);
+    padding:40px 6vw;
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;
+    font-family:var(--mono);font-size:12px;color:var(--text-dim);
+  }
+  footer .status{display:flex;align-items:center;gap:8px;}
+  footer .status .status-dot{font-size:10px;}
+
+  @media (max-width:820px){
+    .hero{grid-template-columns:1fr;}
+    .contact-wrap{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Joel Edward <span>Wairimu.</span></div>
+  <div class="nav-wrap">
+    <nav>
+      <ul>
+        <li><a href="#profile">Profile</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <button id="theme-toggle" onclick="toggleTheme()">
+      <span id="theme-icon">◐</span> <span id="theme-label">Dark</span>
+    </button>
+  </div>
+</header>
+
+<section class="hero" id="profile">
+  <div>
+    <div class="eyebrow">Available for work</div>
+    <h1>Joel Edward Wairimu</h1>
+    <div class="phonetic">/dɪˈpləʊməsi/ <b>noun</b> — 1. The practice of managing relationships and outcomes with tact. 2. Joel's approach to research, design, and people.</div>
+    <p class="lede">Dynamic, all-round student pursuing International Relations & Diplomacy alongside a side course in computer programming. Grounded in diplomatic strategy, cross-cultural communication, and policy analysis, with proficiency in data analytics and research methodologies applied to global issues.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="mailto:jewssinclair@gmail.com">Send a message</a>
+      <a class="btn btn-ghost" href="tel:0705945870">Call 0705 945 870</a>
+      <a class="btn btn-ghost" href="Joel_Edward_Wairimu_CV.pdf" download>Download CV</a>
+    </div>
+  </div>
+  <div class="id-card">
+    <div class="line"><span>status</span><span class="val status-dot">● system online</span></div>
+    <div class="line"><span>location</span><span class="val">NBO // KE</span></div>
+    <div class="line"><span>role</span><span class="val">Graphic Designer / IR Student</span></div>
+    <div class="line"><span>email</span><span class="val">jewssinclair@gmail.com</span></div>
+    <div class="line"><span>phone</span><span class="val">0705 945 870</span></div>
+    <div class="line"><span>focus</span><span class="val">Design · Research · Policy</span></div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="sec-eyebrow">Core Skills</div>
+  <div class="sec-title">Toolkit</div>
+  <div class="sec-phonetic">/ˈtuːlkɪt/ noun — capabilities applied across design, research, and administration.</div>
+  <div class="skills-grid">
+    <span class="pill">Organizational</span>
+    <span class="pill">Result-driven</span>
+    <span class="pill">Analytical thinking</span>
+    <span class="pill">Honest communication</span>
+    <span class="pill">Microsoft Office</span>
+    <span class="pill">Google Workspace</span>
+    <span class="pill">Graphic Design</span>
+    <span class="pill">Photography</span>
+    <span class="pill">Data Entry & Analysis</span>
+    <span class="pill">Document Writing</span>
+    <span class="pill">HTML / CSS / Scratch</span>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="sec-eyebrow">Career Summary</div>
+  <div class="sec-title">Experience</div>
+  <div class="sec-phonetic">guest@joel:~$ ls career --verbose</div>
+
+  <div class="term-card">
+    <div class="term-bar">
+      <span class="path">guest@joel:~/career/real estate </span>
+      <span class="status-tag">Active</span>
+    </div>
+    <div class="term-body">
+      <h3>Property Management</h3>
+      <div class="role-sub">KOSKI HOMES, Kenya · MARCH 2026 – Present</div>
+      <div class="term-log">
+        <span class="g">&gt;boot --Property Management</span><br>
+        <span class="g">&gt;mounting client base:</span> rent collection and management using a specialised system(private owned and managed by me), marketing and web management,POS system management<br>
+        <span class="g">&gt;status -&gt;</span> active
+      </div>
+      <div class="term-body">
+      <h3>DATA HANDLING</h3>
+      <div class="role-sub">selfemployed(contract), Kenya · February 2024 – Present</div>
+      <div class="term-log">
+        <span class="g">&gt;boot --DATA HANDLING</span><br>
+        <span class="g">&gt;mounting client base:</span>data entry, data analysis, data annotation and data analytics<br>
+        <span class="g">&gt;status -&gt;</span> active
+      </div>
+  <div class="term-card">
+    <div class="term-bar">
+      <span class="path">guest@joel:~/career/mountain-view-school</span>
+      <span class="status-tag">Completed</span>
+    </div>
+    <div class="term-body">
+      <h3>IT & Technical Support Intern</h3>
+      <div class="role-sub">Mountain View School, Nairobi · February 2024 – July 2024</div>
+      <div class="term-log">
+        <span class="g">&gt;boot --role=intern</span><br>
+        <span class="g">&gt;mounting duties:</span> data entry, documentation, IT support, teaching<br>
+        <span class="g">&gt;status -&gt;</span> completed
+      </div>
+      <p class="desc">Provided technical and IT support including data entry, document writing and editing, and meeting minutes. Taught basic computer studies to lower primary and pre-primary classes, and supported programming lessons (Scratch, HTML, CSS) for grades 6-7. Covered school events photography.</p>
+      <ul class="achievements">
+        <li>Placed in charge of other interns, easing onboarding to the work area</li>
+        <li>Involved in sporting activities, helping the school break its losing streak</li>
+        <li>Trusted with formal and informal meeting documentation</li>
+        <li>Contributed to analyses valued for close attention to detail</li>
+        <li>Supported student engagement that gradually improved mean exam scores</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="term-card">
+    <div class="term-bar">
+      <span class="path">guest@joel:~/career/graphic-design</span>
+      <span class="status-tag">Active</span>
+    </div>
+    <div class="term-body">
+      <h3>Graphic Designer</h3>
+      <div class="role-sub">Self-employed · November 2023 – Present</div>
+      <div class="term-log">
+        <span class="g">&gt;boot --role=graphic-designer</span><br>
+        <span class="g">&gt;mounting outputs:</span> posters, apparel, household items<br>
+        <span class="g">&gt;status -&gt;</span> active
+      </div>
+      <p class="desc">Designs posters, clothing, and household items to sharpen computing and design skills, while working in a community cyber café on printing and homework editing for university students.</p>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="sec-eyebrow">Background</div>
+  <div class="sec-title">Education</div>
+  <div class="sec-phonetic">/ˌɛdʒʊˈkeɪʃn/ noun — formal instruction, listed most recent first.</div>
+  <div class="edu-list">
+    <div class="edu-item">
+      <div class="edu-num">01</div>
+      <div>
+        <div class="edu-title">BA International Relations & Diplomacy</div>
+        <div class="edu-sub">Riara University</div>
+      </div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-num">02</div>
+      <div>
+        <div class="edu-title">Diploma, NCC Level 4 Computing</div>
+        <div class="edu-sub">Computer Pride College</div>
+      </div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-num">03</div>
+      <div>
+        <div class="edu-title">Certificate, ICDL Packages 1 & 2</div>
+        <div class="edu-sub">IAT Kasarani</div>
+      </div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-num">04</div>
+      <div>
+        <div class="edu-title">KCSE — Grade B-</div>
+        <div class="edu-sub">Light Academy</div>
+      </div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-num">05</div>
+      <div>
+        <div class="edu-title">KCPE — 363 Marks</div>
+        <div class="edu-sub">Pleasant View School</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="referees">
+  <div class="sec-eyebrow">References</div>
+  <div class="sec-title">Referees</div>
+  <div class="sec-phonetic">/ˈrɛfəriː/ noun — people who can vouch for the work above.</div>
+  <div class="ref-grid">
+    <div class="ref-card">
+      <h4>Regina Maina</h4>
+      <p>Director, Mountain View School</p>
+      <span class="tel">0722 704 965</span>
+    </div>
+    <div class="ref-card">
+      <h4>Joshua Ngondi</h4>
+      <p>Teacher — Football & Handball Coach, FIFA Handball Referee</p>
+      <span class="tel">0727 651 295</span>
+    </div>
+    <div class="ref-card">
+      <h4>Doris Murochia</h4>
+      <p>Teacher — Individual/Group Therapist</p>
+      <span class="tel">0729 046 488</span>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="sec-eyebrow">Get in Touch</div>
+  <div class="sec-title">Connect</div>
+  <div class="sec-phonetic">/kəˈnɛkt/ verb — 1. To establish a communication link. 2. Reaching out for opportunities and collaboration.</div>
+  <div class="contact-wrap">
+    <div class="contact-block">
+      <h4>Primary Email</h4>
+      <a class="big" href="mailto:jewssinclair@gmail.com">jewssinclair@gmail.com</a>
+      <h4>Phone</h4>
+      <a class="big" href="tel:0705945870" style="color:var(--text)">0705 945 870</a>
+    </div>
+    <div class="contact-block">
+      <h4>Current Status</h4>
+      <p class="desc" style="margin-bottom:24px;">Open for design, research, and internship opportunities. Whether you're looking to collaborate or have an inquiry, feel free to reach out.</p>
+      <a class="btn btn-primary" href="mailto:jewssinclair@gmail.com">Send Message</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>© 2026 Joel Edward Wairimu.</div>
+  <div class="status"><span class="status-dot">●</span> System Optimal — NBO // KE</div>
+</footer>
+
+<script>
+  function applyTheme(theme){
+    document.documentElement.setAttribute('data-theme', theme);
+    document.getElementById('theme-icon').textContent = theme === 'light' ? '◑' : '◐';
+    document.getElementById('theme-label').textContent = theme === 'light' ? 'Light' : 'Dark';
+    localStorage.setItem('theme', theme);
+  }
+  function toggleTheme(){
+    const current = document.documentElement.getAttribute('data-theme') || 'dark';
+    applyTheme(current === 'dark' ? 'light' : 'dark');
+  }
+  (function initTheme(){
+    const saved = localStorage.getItem('theme');
+    const preferLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    applyTheme(saved || (preferLight ? 'light' : 'dark'));
+  })();
+</script>
+</body>
+</html>
